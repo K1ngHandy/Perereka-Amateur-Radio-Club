@@ -9,7 +9,28 @@
     <h1>Perereka Amateur Radio Club</h1>
     <p>See console...</p>
     <script>
-        
+        // Asynchronous code using timeouts
+        setTimeout(broadcastUpdates, 180000); // 1800000 ms = 30 min
+            
+        function broadcastUpdates() {
+            // this checks if anyone is currently using the frequency, and delays broadcast for another 2 minutes (120 seconds, or 120000 ms)
+            
+            if (isFrequencyBusy()) {
+                setTimeout(broadcastUpdates, 120000);
+                return; // nothing else to do now, exit function
+            }
+
+            const updates = createAudioFrom('latest_report.txt');
+                // Function to broadcast message. this will output the computer's audio into the transmitter located at repeater tower
+            transmitAudio(updates);
+                // Transmit to smartphone users connected to website
+            streamAudio(updates);
+                // Ready to reschedule (30 minutes)
+            }
+
+            setInterval(() => {
+                console.log('beat')
+            }, 1000);
     </script>
 </body>
 </html>
