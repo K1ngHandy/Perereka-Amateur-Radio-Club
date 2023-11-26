@@ -1,56 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perereka Amateur Radio Club</title>
-</head>
-<body>
-    <h1>Perereka Amateur Radio Club</h1>
-    <p>See console...</p>
-    <script>
-        // Asynchronous code using timeouts
-        setTimeout(broadcastUpdates, 180000); // 1800000 ms = 30 min
-            
-        function broadcastUpdates() {
-            if (isFrequencyBusy()) { // this checks if anyone is currently using the frequency, and delays broadcast for another 2 minutes (120 seconds, or 120000 ms)
-                setTimeout(broadcastUpdates, 120000);
-                return; // nothing else to do now, exit function
-            }
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Perereka Amateur Radio Club</title>
+    </head>
+    <body>
+        <h1>Perereka Amateur Radio Club</h1>
+        <button id="button">Click here</button>
+        <p id="paragraph">Count ^</p>
 
-            // const updates = createAudioFrom('latest_report.txt');
-            //     // Function to broadcast message. this will output the computer's audio into the transmitter located at repeater tower
-            // transmitAudio(updates);
-            //     // Transmit to smartphone users connected to website
-            // streamAudio(updates);
-            //     // Ready to reschedule (30 minutes)
+        <script>
+            // Asynchronous code using timeouts
+            // setTimeout(broadcastUpdates, 180000); // 1800000 ms = 30 min
+                
+            // function broadcastUpdates() {
+                // if (isFrequencyBusy()) { // this checks if anyone is currently using the frequency, and delays broadcast for another 2 minutes (120 seconds, or 120000 ms)
+                //     setTimeout(broadcastUpdates, 120000);
+                // }
+
+                // const updates = createAudioFrom('latest_report.txt');
+                //     // Function to broadcast message. this will output the computer's audio into the transmitter located at repeater tower
+                // transmitAudio(updates);
+                //     // Transmit to smartphone users connected to website
+                // streamAudio(updates);
+                //     // Ready to reschedule (30 minutes)
+                // }
+
+                // setInterval(() => {
+                //     console.log('beat')
+                // }, 1000);
+
+                // Asynchronous code using browser events
+                // getCityData(); // function to access the city's API and get data in JSON format
+                // createAudio('updates.mp3'); // function to create audio file from text received
+                // transmitAudio('updates.mp3'); // function to broadcast message. In practice, this will output audio to transmitter mic and trigger PTT (Push to Talk)
+                // setTimeout(broadcastUpdates, 18000000);
+
+                // talkButton.ontouchstart = startTalk;
+                // talkbutton.ontouchend = finishTalk;
             // }
 
-            // setInterval(() => {
-            //     console.log('beat')
-            // }, 1000);
+            // function startTalk() {
+            //     if (isFrequencyBusy()) {
+            //         return;
+            //     }
+
+            //     startStreaming();
+            // }
+
+            // function finishTalk() {
+            //     stopStreaming();
+            // }
 
             // Asynchronous code using browser events
-            getCityData(); // function to access the city's API and get data in JSON format
-            createAudio('updates.mp3'); // function to create audio file from text received
-            transmitAudio('updates.mp3'); // function to broadcast message. In practice, this will output audio to transmitter mic and trigger PTT (Push to Talk)
-            setTimeout(broadcastUpdates, 18000000);
+            const button = document.getElementById('button'); // grab button text
+            const buttonText = button.textContent;
+            const paragraph = document.getElementById('paragraph'); // grab paragraph element
+            const paragraphText = paragraph.textContent;
 
-            talkButton.ontouchstart = startTalk;
-            talkbutton.ontouchend = finishTalk;
-        }
+            let counter = 0 // starting count
 
-        function startTalk() {
-            if (isFrequencyBusy()) {
-                return;
-            }
-
-            startStreaming();
-        }
-
-        function finishTalk() {
-            stopStreaming();
-        }
-    </script>
-</body>
+            button.onclick = () => {
+                counter++
+                console.log(counter);
+                paragraphText = `${counter}`;
+            };
+        </script>
+    </body>
 </html>
